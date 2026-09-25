@@ -1,69 +1,62 @@
-import Image from "next/image";
+import Link from "next/link";
+import { MEETUP_EYEBROW, MEETUP_NAME } from "@/lib/brand";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <div className="space-y-24">
+      <section className="relative overflow-hidden">
+        <div className="hero-mesh" aria-hidden />
+        <div className="relative max-w-3xl pt-8">
+          <p className="eyebrow">{MEETUP_EYEBROW}</p>
+          <h1 className="heading-xl mt-4">
+            Show your project.
+            <br />
+            Vote for the best.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mt-6 max-w-xl text-base leading-6 text-body">
+            {MEETUP_NAME} is a participant showcase. Submit one project, browse
+            everyone else&apos;s work, and cast a single vote. The ranking is
+            live, public, and decided only by the room.
           </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link href="/projects" className="btn-pill">
+              Browse projects
+            </Link>
+            <Link href="/signup" className="btn-pill-secondary">
+              Join the meetup
+            </Link>
+            <Link href="/leaderboard" className="px-3 py-3 text-sm text-body">
+              View leaderboard
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </section>
+
+      <section className="grid gap-4 sm:grid-cols-3">
+        {[
+          {
+            step: "01",
+            title: "Create an account",
+            body: "Sign up with your name, email, and password.",
+          },
+          {
+            step: "02",
+            title: "Submit one project",
+            body: "Add a title, description, live URL, and category.",
+          },
+          {
+            step: "03",
+            title: "Vote once",
+            body: "Pick another participant’s project. Votes are permanent.",
+          },
+        ].map((item) => (
+          <div key={item.step} className="card p-6">
+            <p className="eyebrow">{item.step}</p>
+            <h2 className="heading-md mt-3">{item.title}</h2>
+            <p className="mt-2 text-sm leading-5 text-body">{item.body}</p>
+          </div>
+        ))}
+      </section>
     </div>
   );
 }
